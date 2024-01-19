@@ -1,0 +1,47 @@
+/* AutoComplete.css */
+
+.autocomplete-container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-floating {
+    position: relative;
+}
+
+.autocomplete-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #6c757d;
+    background-color: transparent;
+    outline: none;
+}
+
+.dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-menu li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f0f0f0;
+}
