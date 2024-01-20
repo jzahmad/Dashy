@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/dashy/static/css/main.2e9e7e02.css",
+    "main.js": "/dashy/static/js/main.85525c62.js",
+    "static/js/787.1dcf3c88.chunk.js": "/dashy/static/js/787.1dcf3c88.chunk.js",
+    "static/media/logo.svg": "/dashy/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/dashy/index.html",
+    "main.2e9e7e02.css.map": "/dashy/static/css/main.2e9e7e02.css.map",
+    "main.85525c62.js.map": "/dashy/static/js/main.85525c62.js.map",
+    "787.1dcf3c88.chunk.js.map": "/dashy/static/js/787.1dcf3c88.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2e9e7e02.css",
+    "static/js/main.85525c62.js"
+  ]
+}
