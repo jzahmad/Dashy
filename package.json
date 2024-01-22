@@ -1,5 +1,6 @@
 {
-  "name": "dashy",
+  "homepage": "http://jzahmad.github.io/Dashy",
+  "name": "Dashy",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
