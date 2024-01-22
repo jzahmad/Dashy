@@ -60,7 +60,7 @@ export default function StockList() {
                         <tr className="table-row" key={index}>
                             <th scope="row">{symbols[index]}</th>
                             <td>{e.data.c}</td>
-                            {<td style={{ color: e.data.d > 0 ? 'green' : 'red' }}>{e.data.d}</td>}
+                            <td style={{ color: e.data.d > 0 ? 'green' : 'red' }}>{e.data.d}</td>
                             <td style={{ color: e.data.dp > 0 ? 'green' : 'red' }}>{e.data.dp}</td>
                             <td>{e.data.h}</td>
                             <td>{e.data.l}</td>
