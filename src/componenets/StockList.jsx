@@ -1,32 +1,46 @@
-import { useEffect, useState } from "react";
-import finHubb from '../Apis/finnHub'; // Make sure this import is correct
-import { FaCaretDown,FaCaretUp } from "react-icons/fa";
-
+import React, { useEffect, useState, useContext } from "react";
+import finHubb from '../Apis/finnHub';
+import { useNavigate } from "react-router-dom";
+import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { WatchListContext } from "../Context/WatchListContext";
 
 export default function StockList() {
     const [stocks, setStocks] = useState([]);
-    const symbols = ["MSFT", "AAPL", "GOOGL"]; // Add more symbols if needed
+    const { symbols,setSymbols } = useContext(WatchListContext);
+    const navigate=useNavigate()
+
+    const handleDelete = (e) => {
+        setSymbols(symbols.filter(symbol => symbol !== e));
+    };
+
+    const handleNavigate = (symbol) => {
+        navigate(`details/${symbol}`)
+    };
 
     useEffect(() => {
         let isMounted = true;
 
         const fetchData = async () => {
             try {
-                const promises = symbols.map(e =>
-                    finHubb.get("/quote", {
-                        params: {
-                            symbol: e
-                        }
-                    })
-                );
+                // Check if symbols array is not empty
+                if (symbols.length > 0) {
+                    const promises = symbols.map(e =>
+                        finHubb.get("/quote", {
+                            params: {
+                                symbol: e
+                            }
+                        })
+                    );
 
-                const res = await Promise.all(promises);
+                    const res = await Promise.all(promises);
 
-                if (isMounted) {
-                    setStocks(res);
+                    if (isMounted) {
+                        setStocks(res);
+                    }
+                } else {
+                    // If symbols array is empty, reset stocks
+                    setStocks([]);
                 }
-
-                console.log(res);
             } catch (error) {
                 // Handle error
                 console.error(error);
@@ -38,7 +52,8 @@ export default function StockList() {
         return () => {
             isMounted = false;
         };
-    }, []); // Empty dependency array to run the effect only once
+    }, [symbols]);// Empty dependency array to run the effect only once
+    console.log(stocks)
     
     return (
         <div>
@@ -56,18 +71,21 @@ export default function StockList() {
                 </tr>
                </thead>
                <tbody>
-                    {stocks.map((e, index) => (
-                        <tr className="table-row" key={index}>
-                            <th scope="row">{symbols[index]}</th>
-                            <td>{e.data.c}</td>
-                            <td style={{ color: e.data.d > 0 ? 'green' : 'red' }}>{e.data.d}</td>
-                            <td style={{ color: e.data.dp > 0 ? 'green' : 'red' }}>{e.data.dp}</td>
-                            <td>{e.data.h}</td>
-                            <td>{e.data.l}</td>
-                            <td>{e.data.o}</td>
-                            <td>{e.data.pc}</td>
-                        </tr>
-                    ))}
+               {stocks.map((e, index) => (
+                    <tr className="table-row" key={index} onClick={()=>handleNavigate(symbols[index])}>
+                        <th scope="row">{symbols[index]}</th>
+                        <td>{e.data.c}</td>
+                        <td style={{ color: e.data.d > 0 ? 'green' : 'red' }}>{e.data.d}{e.data.d>0 ? <FaCaretUp/> : <FaCaretDown/> }</td>
+                        <td style={{ color: e.data.dp > 0 ? 'green' : 'red' }}>{e.data.dp}{e.data.dp>0 ? <FaCaretUp/> : <FaCaretDown/> }</td>
+                        <td>{e.data.h}</td>
+                        <td>{e.data.l}</td>
+                        <td>{e.data.o}</td>
+                        <td>{e.data.pc}</td>
+                        <td>
+                            <button onClick={() => handleDelete(symbols[index])}>Delete</button>
+                        </td>
+                    </tr>
+                ))}
                </tbody>
             </table>
         </div>

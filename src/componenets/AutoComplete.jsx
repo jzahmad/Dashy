@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './AutoComplete.css'; // Assuming you have the corresponding CSS file
 import finnHub from '../Apis/finnHub';
+import { WatchListContext } from "../Context/WatchListContext";
 
 export default function AutoComplete() {
     const [search, setSearch] = useState("");
     const [result, setResult] = useState([]);
+    const {symbols,setSymbols} = useContext(WatchListContext)
 
     const handleInputChange = (e) => {
         setSearch(e.target.value);
+    };
+
+    const handleClick = (e) => {
+        if (!symbols.includes(e.symbol)) {
+            setSymbols([...symbols, e.symbol]);
+        }
     };
 
     useEffect(() => {
@@ -46,8 +54,8 @@ export default function AutoComplete() {
             {result.length > 0 && (
                 <ul style={{ height: "500px", overflowY: "scroll", overflowX: "hidden", cursor: "pointer" }} className={containerClassName}>
                     {result.map((e, index) => (
-                        <li key={index}>
-                            {e.symbol}
+                        <li key={index} onClick={() => handleClick(e)}>
+                            {e.symbol} {e.description}
                         </li>
                     ))}
                 </ul>
