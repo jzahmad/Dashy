@@ -9,8 +9,11 @@ export default function StockList() {
     const { symbols,setSymbols } = useContext(WatchListContext);
     const navigate=useNavigate()
 
-    const handleDelete = (e) => {
-        setSymbols(symbols.filter(symbol => symbol !== e));
+    const handleDelete = (symbolToDelete) => {
+        const updatedSymbols = symbols.filter(symbol => symbol !== symbolToDelete);
+        const updatedStocks = stocks.filter(stock => stock.data.t !== symbolToDelete);
+        setSymbols(updatedSymbols);
+        setStocks(updatedStocks);
     };
 
     const handleNavigate = (symbol) => {
