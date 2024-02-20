@@ -1,10 +1,13 @@
-import { useEffect,useState } from 'react';
+import { useEffect,useState,useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import finnHub from '../Apis/finnHub';
 import StockChart from '../componenets/StockChart'
+import { WatchListContext } from "../Context/WatchListContext";
+import { StockData } from './StockData';
 
 export default function StockDetails() {
     const {symbol}=useParams()
+    
     const [graphData, setGraphData] = useState({
         day: [
           { x: 1, y: 10 },
@@ -43,7 +46,6 @@ export default function StockDetails() {
           { x: 2030, y: 150 }
         ]
       });
-      console.log(graphData)
 
     // useEffect(() => {
     //     const fetchData = async () => {
@@ -73,10 +75,10 @@ export default function StockDetails() {
     //   }, []);
 
     return (
-
-        <div>
-         <a>API access denied for {symbol}. Hard Coded Data is used</a>
-         {!graphData && <StockChart/>}
-        </div>
-      );
+      <div>
+          {/* <a>API access denied for {symbol}. Hard Coded Data is used</a> */}
+          <StockChart chartData={graphData} symbol={symbol}/> 
+          <StockData symbol={symbol}/>
+      </div>
+  );
 }

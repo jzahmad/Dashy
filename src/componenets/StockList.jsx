@@ -52,7 +52,7 @@ export default function StockList() {
         return () => {
             isMounted = false;
         };
-    }, [symbols]);// Empty dependency array to run the effect only once
+    }, [symbols]);
     console.log(stocks)
     
     return (
@@ -72,8 +72,8 @@ export default function StockList() {
                </thead>
                <tbody>
                {stocks.map((e, index) => (
-                    <tr className="table-row" key={index} onClick={()=>handleNavigate(symbols[index])}>
-                        <th scope="row">{symbols[index]}</th>
+                    <tr className="table-row" key={index}>
+                        <th scope="row" onClick={()=>handleNavigate(symbols[index])}>{symbols[index]}</th>
                         <td>{e.data.c}</td>
                         <td style={{ color: e.data.d > 0 ? 'green' : 'red' }}>{e.data.d}{e.data.d>0 ? <FaCaretUp/> : <FaCaretDown/> }</td>
                         <td style={{ color: e.data.dp > 0 ? 'green' : 'red' }}>{e.data.dp}{e.data.dp>0 ? <FaCaretUp/> : <FaCaretDown/> }</td>
