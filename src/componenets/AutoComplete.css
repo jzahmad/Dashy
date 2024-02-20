@@ -1,47 +1,91 @@
-/* AutoComplete.css */
-
-.autocomplete-container {
-    display: flex;
-    justify-content: center;
-}
-
-.form-floating {
-    position: relative;
-}
-
-.autocomplete-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-bottom: 1px solid #6c757d;
-    background-color: transparent;
-    outline: none;
-}
-
 .dropdown-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     position: absolute;
-    width: 100%;
-    background-color: #fff;
-    border: 1px solid #ced4da;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: none;
     z-index: 1000;
-}
-
-.dropdown-menu.show {
+    top: 100%;
+    left: 0;
+    display: none;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+  }
+  
+  .show {
     display: block;
-}
-
-.dropdown-menu li {
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.dropdown-menu li:hover {
-    background-color: #f0f0f0;
-}
+  }
+  
+  .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+  }
+  
+  .dropdown-item:focus, .dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+  }
+  
+  .dropdown-item:focus {
+    outline: 0;
+  }
+  
+  .form-floating {
+    position: relative;
+  }
+  
+  .form-floating input {
+    height: calc(3.5rem + 2px);
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: transparent;
+    z-index: 1;
+  }
+  
+  .form-floating input:focus {
+    z-index: 2;
+    border-color: #007bff;
+  }
+  
+  .form-floating label {
+    position: absolute;
+    top: 0.625rem;
+    left: 0.75rem;
+    font-size: 1rem;
+    color: #6c757d;
+    pointer-events: none;
+    transition: transform 0.1s ease-in-out, opacity 0.1s ease-in-out;
+    transform-origin: top left;
+  }
+  
+  .form-floating input:not(:placeholder-shown) ~ label,
+  .form-floating input:focus ~ label,
+  .form-floating input:not(:focus):valid ~ label {
+    font-size: 0.875rem;
+    transform: translateY(-1rem) scale(0.85);
+    opacity: 0.5;
+  }
+  
+  .form-floating label::after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+  
